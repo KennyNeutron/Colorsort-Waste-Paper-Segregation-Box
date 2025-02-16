@@ -1,0 +1,5 @@
+White: 
+
+RED Filter: <=30
+GREEN Filter: <=30
+BLUE Filter: <=10
