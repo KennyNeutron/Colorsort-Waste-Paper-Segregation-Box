@@ -3,3 +3,8 @@ White:
 RED Filter: <=30
 GREEN Filter: <=30
 BLUE Filter: <=10
+
+
+RED Filter: 250 
+GREEN Filter: 250
+BLUE Filter: 75

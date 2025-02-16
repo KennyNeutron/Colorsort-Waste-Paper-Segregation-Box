@@ -27,7 +27,15 @@
  *    - Modify threshold values based on sensor readings in your environment.
  *    - Add fail-safe mechanisms if needed for real-world applications.
  */
+int Filter_RED = 0;
+int Filter_GREEN = 0;
+int Filter_BLUE = 0;
 
+int tolerance = 10;
+
+int BaseValue_Red = 230;
+int BaseValue_Green = 230;
+int BaseValue_Blue = 70;
 
 void setup() {
   Serial.begin(115200);
@@ -37,8 +45,22 @@ void setup() {
 }
 
 void loop() {
-  ColorSensor_UpdateFilters();
+  ColorSensor_ShowValues();
 
-  
+  //ColorSensor_UpdateFilters();
 
+  if (Filter_RED <= (30 + tolerance) && Filter_GREEN <= (30 + tolerance) && Filter_BLUE <= (30 + tolerance)) {
+    Serial.println("I see a WHITE thing!");
+  } else if (Filter_RED >= (BaseValue_Red - tolerance) &&
+    Filter_RED <= (BaseValue_Red + tolerance) &&
+    Filter_GREEN >= (BaseValue_Green - tolerance) && 
+    Filter_GREEN <= (BaseValue_Green + tolerance) && 
+    Filter_BLUE >= (BaseValue_Blue - tolerance) &&  
+    Filter_BLUE <= (BaseValue_Blue + tolerance)) {
+    
+    Serial.println("I see a WHITE thing!");
+
+  }else {
+    Serial.println("I see a COLORED thing!");
+  }
 }

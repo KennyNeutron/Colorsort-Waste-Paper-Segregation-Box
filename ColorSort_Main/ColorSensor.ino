@@ -5,11 +5,6 @@
 
 #define ColorSensor_SignalPin 8
 
-int Filter_RED = 0;
-int Filter_GREEN = 0;
-int Filter_BLUE = 0;
-
-
 void ColorSensor_ShowValues() {
   ColorSensor_UpdateFilters();
   Serial.println("**************************");
