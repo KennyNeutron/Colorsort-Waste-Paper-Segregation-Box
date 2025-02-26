@@ -34,13 +34,13 @@ int Filter_RED = 0;
 int Filter_GREEN = 0;
 int Filter_BLUE = 0;
 
-int tolerance = 10;
+int tolerance = 40;
 
-int BaseValue_Red = 230;
-int BaseValue_Green = 230;
-int BaseValue_Blue = 70;
+int BaseValue_Red = 200;
+int BaseValue_Green = 250;
+int BaseValue_Blue = 90;
 
-void setup() {  
+void setup() {
   Serial.begin(115200);
   Serial.println("ColorSort System Start...");
 
@@ -48,29 +48,27 @@ void setup() {
   myservo.attach(9);
   myservo.write(0);
   delay(2000);
+  myservo.write(90);
+  delay(2000);
 }
 
 void loop() {
 
   ColorSensor_ShowValues();
 
-  //ColorSensor_UpdateFilters();
+  ColorSensor_UpdateFilters();
 
-  if (Filter_RED <= (30 + tolerance) && Filter_GREEN <= (30 + tolerance) && Filter_BLUE <= (30 + tolerance)) {
+  if (Filter_RED <= (160 + tolerance) && Filter_GREEN <= (180 + tolerance) && Filter_BLUE <= (50 + tolerance)) {
     Serial.println("I see a WHITE thing!");
-  } else if (Filter_RED >= (BaseValue_Red - tolerance) && Filter_RED <= (BaseValue_Red + tolerance) && Filter_GREEN >= (BaseValue_Green - tolerance) && Filter_GREEN <= (BaseValue_Green + tolerance) && Filter_BLUE >= (BaseValue_Blue - tolerance) && Filter_BLUE <= (BaseValue_Blue + tolerance)) {
-
-    Serial.println("I see a WHITE thing!");
-
+  } else if (Filter_RED < BaseValue_Red || Filter_GREEN < BaseValue_Green || Filter_BLUE < BaseValue_Blue) {
+    Serial.println("I see a COLORED thing!!");
   } else {
-    Serial.println("I see a COLORED thing!");
+    Serial.println("I see NO OBJECT!!!");
   }
+}
 
+void Servo_ServeLeft() {
   myservo.write(0);
-  delay(2000);
-  myservo.write(90);
-  delay(2000);
-  myservo.write(180);
   delay(2000);
   myservo.write(90);
   delay(2000);
