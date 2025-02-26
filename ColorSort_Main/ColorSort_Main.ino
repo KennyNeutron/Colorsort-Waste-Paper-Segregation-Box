@@ -36,14 +36,13 @@ int Filter_BLUE = 0;
 
 int tolerance = 40;
 
-int BaseValue_Red = 200;
-int BaseValue_Green = 250;
-int BaseValue_Blue = 90;
+int BaseValue_Red = 190;
+int BaseValue_Green = 240;
+int BaseValue_Blue = 65;
 
 void setup() {
   Serial.begin(115200);
   Serial.println("ColorSort System Start...");
-
   ColorSensor_init();
   myservo.attach(9);
   myservo.write(0);
@@ -51,6 +50,8 @@ void setup() {
   myservo.write(90);
   delay(2000);
 }
+
+
 
 void loop() {
 
@@ -60,15 +61,25 @@ void loop() {
 
   if (Filter_RED <= (160 + tolerance) && Filter_GREEN <= (180 + tolerance) && Filter_BLUE <= (50 + tolerance)) {
     Serial.println("I see a WHITE thing!");
+    Servo_ServeLeft();
   } else if (Filter_RED < BaseValue_Red || Filter_GREEN < BaseValue_Green || Filter_BLUE < BaseValue_Blue) {
     Serial.println("I see a COLORED thing!!");
+    Servo_ServeRight();
   } else {
     Serial.println("I see NO OBJECT!!!");
   }
+
 }
 
 void Servo_ServeLeft() {
   myservo.write(0);
+  delay(2000);
+  myservo.write(90);
+  delay(2000);
+}
+
+void Servo_ServeRight(){
+  myservo.write(180);
   delay(2000);
   myservo.write(90);
   delay(2000);
