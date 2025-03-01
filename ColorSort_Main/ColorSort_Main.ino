@@ -34,11 +34,7 @@ int Filter_RED = 0;
 int Filter_GREEN = 0;
 int Filter_BLUE = 0;
 
-int tolerance = 40;
-
-int BaseValue_Red = 190;
-int BaseValue_Green = 240;
-int BaseValue_Blue = 65;
+int tolerance = 100;
 
 void setup() {
   Serial.begin(115200);
@@ -59,28 +55,29 @@ void loop() {
 
   ColorSensor_UpdateFilters();
 
-  if (Filter_RED <= (160 + tolerance) && Filter_GREEN <= (180 + tolerance) && Filter_BLUE <= (50 + tolerance)) {
-    Serial.println("I see a WHITE thing!");
+  if (isWhite(600, 600, 200) && !isNoObject(1400, 1800, 500)) {
+    Serial.println("I see WHITE object!");
     Servo_ServeLeft();
-  } else if (Filter_RED < BaseValue_Red || Filter_GREEN < BaseValue_Green || Filter_BLUE < BaseValue_Blue) {
-    Serial.println("I see a COLORED thing!!");
+  }if(!isWhite(600, 600, 200) && isNoObject(1400, 1800, 500)){
+    Serial.println("I see NO object!");
+  }else if(!isWhite(600, 600, 200) && !isNoObject(1400, 1800, 500)){
+    Serial.println("I see a COLORED object!");
     Servo_ServeRight();
-  } else {
-    Serial.println("I see NO OBJECT!!!");
   }
 
+  delay(2000);
 }
 
 void Servo_ServeLeft() {
   myservo.write(0);
-  delay(2000);
+  delay(1000);
   myservo.write(90);
   delay(2000);
 }
 
-void Servo_ServeRight(){
+void Servo_ServeRight() {
   myservo.write(180);
-  delay(2000);
+  delay(1000);
   myservo.write(90);
   delay(2000);
 }

@@ -39,3 +39,26 @@ int getColorFrequency(bool s2_state, bool s3_state) {
   digitalWrite(ColorSensor_S3, s3_state);
   return pulseIn(ColorSensor_SignalPin, LOW);
 }
+
+
+bool isWhite(int valRed, int valGreen, int valBlue) {
+  if ((Filter_RED <= (valRed + tolerance) && Filter_RED >= (valRed - tolerance)) && 
+  (Filter_GREEN <= (valGreen + tolerance) && Filter_GREEN >= (valGreen - tolerance)) &&
+  (Filter_BLUE <= (valBlue + tolerance) && Filter_BLUE >= (valBlue - tolerance))
+  ){
+    return true;
+  }else{
+    return false;
+  }
+}
+
+bool isNoObject(int valRed, int valGreen, int valBlue) {
+  if ((Filter_RED <= (valRed + tolerance) && Filter_RED >= (valRed - tolerance)) && 
+  (Filter_GREEN <= (valGreen + tolerance) && Filter_GREEN >= (valGreen - tolerance)) &&
+  (Filter_BLUE <= (valBlue + tolerance) && Filter_BLUE >= (valBlue - tolerance))
+  ){
+    return true;
+  }else{
+    return false;
+  }
+}
