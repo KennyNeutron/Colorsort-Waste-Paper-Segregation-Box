@@ -42,23 +42,17 @@ int getColorFrequency(bool s2_state, bool s3_state) {
 
 
 bool isWhite(int valRed, int valGreen, int valBlue) {
-  if ((Filter_RED <= (valRed + tolerance) && Filter_RED >= (valRed - tolerance)) && 
-  (Filter_GREEN <= (valGreen + tolerance) && Filter_GREEN >= (valGreen - tolerance)) &&
-  (Filter_BLUE <= (valBlue + tolerance) && Filter_BLUE >= (valBlue - tolerance))
-  ){
+  if ((Filter_RED <= (valRed + tolerance) && Filter_RED >= (valRed - tolerance)) && (Filter_GREEN <= (valGreen + tolerance) && Filter_GREEN >= (valGreen - tolerance)) && (Filter_BLUE <= (valBlue + tolerance) && Filter_BLUE >= (valBlue - tolerance))) {
     return true;
-  }else{
+  } else {
     return false;
   }
 }
 
 bool isNoObject(int valRed, int valGreen, int valBlue) {
-  if ((Filter_RED <= (valRed + tolerance) && Filter_RED >= (valRed - tolerance)) && 
-  (Filter_GREEN <= (valGreen + tolerance) && Filter_GREEN >= (valGreen - tolerance)) &&
-  (Filter_BLUE <= (valBlue + tolerance) && Filter_BLUE >= (valBlue - tolerance))
-  ){
+  if ((Filter_RED <= (valRed + tolerance) && Filter_RED >= (valRed - tolerance)) && (Filter_GREEN <= (valGreen + tolerance) && Filter_GREEN >= (valGreen - tolerance)) && (Filter_BLUE <= (valBlue + tolerance) && Filter_BLUE >= (valBlue - tolerance))) {
     return true;
-  }else{
+  } else {
     return false;
   }
 }

@@ -34,7 +34,7 @@ int Filter_RED = 0;
 int Filter_GREEN = 0;
 int Filter_BLUE = 0;
 
-int tolerance = 100;
+int tolerance = 200;
 
 void setup() {
   Serial.begin(115200);
@@ -55,12 +55,13 @@ void loop() {
 
   ColorSensor_UpdateFilters();
 
-  if (isWhite(600, 600, 200) && !isNoObject(1400, 1800, 500)) {
+  if (isWhite(600, 600, 200) && !isNoObject(3500, 4000, 1100)) {
     Serial.println("I see WHITE object!");
     Servo_ServeLeft();
-  }if(!isWhite(600, 600, 200) && isNoObject(1400, 1800, 500)){
+  }
+  if (!isWhite(600, 600, 200) && isNoObject(4000, 4500, 1200)) {
     Serial.println("I see NO object!");
-  }else if(!isWhite(600, 600, 200) && !isNoObject(1400, 1800, 500)){
+  } else if (!isWhite(600, 600, 200) && !isNoObject(3500, 4000, 1100)) {
     Serial.println("I see a COLORED object!");
     Servo_ServeRight();
   }
